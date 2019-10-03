@@ -3,6 +3,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,28 @@ namespace Cosmy
     {
         private readonly DocumentClient documentClient;
         private readonly CosmyConfiguration configuration;
+
+
+        public IQueryable<T> CreateDocumentQuery<T>(string collection, object partitionKey = null)
+        {
+            var uri = UriFactory.CreateDocumentCollectionUri(configuration.Database, collection);
+
+            var partitionOptions = (partitionKey != null) ? new FeedOptions { PartitionKey = new PartitionKey(partitionKey) } : null;
+
+            var query = this.documentClient.CreateDocumentQuery<T>(uri, partitionOptions);
+
+            return query;
+        }
+
+        public async Task<IEnumerable<T>> ExecuteQuery<T>(IQueryable<T> source) where T : class
+        {
+            return await source.ExecuteQuery();
+        }
+
+        public async Task<IEnumerable<TResult>> ExecuteQuery<T, TResult>(IQueryable<T> source) where T : class
+        {
+            return await source.ExecuteQuery<T,TResult>();
+        }
 
         public async Task UpdateDocumentAsync<T>(Guid documentId, string collection, T data, object partitionKey = null) where T : class
         {
