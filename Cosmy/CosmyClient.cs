@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 
 namespace Cosmy
 {
-    public class CosmyClient
+    public class CosmyClient : ICosmyClient
     {
         private readonly DocumentClient documentClient;
         private readonly CosmyConfiguration configuration;
 
+        public CosmyClient(DocumentClient documentClient, CosmyConfiguration configuration)
+        {
+            this.documentClient = documentClient;
+            this.configuration = configuration;
+        }
 
         public IQueryable<T> CreateDocumentQuery<T>(string collection, object partitionKey = null)
         {
