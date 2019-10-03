@@ -38,7 +38,23 @@ namespace Cosmy
 
         public async Task<IEnumerable<TResult>> ExecuteQuery<T, TResult>(IQueryable<T> source) where T : class
         {
-            return await source.ExecuteQuery<T,TResult>();
+            return await source.ExecuteQuery<T, TResult>();
+        }
+
+        public async Task<T> GetDocumentAsync<T>(Guid documentId, string collection, object partitionKey = null) where T : class
+        {
+            return await this.GetDocumentAsync<T>(documentId.ToString(), collection, partitionKey);
+        }
+
+        public async Task<T> GetDocumentAsync<T>(string documentId, string collection, object partitionKey = null) where T : class
+        {
+            var uri = UriFactory.CreateDocumentUri(configuration.Database, collection, documentId);
+
+            var partitionOptions = (partitionKey != null) ? new RequestOptions { PartitionKey = new PartitionKey(partitionKey) } : null;
+
+            var query = await documentClient.ReadDocumentAsync<T>(uri, partitionOptions);
+
+            return query.Document;
         }
 
         public async Task UpdateDocumentAsync<T>(Guid documentId, string collection, T data, object partitionKey = null) where T : class
