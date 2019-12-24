@@ -8,6 +8,7 @@
     <PackageProjectUrl>www.github.com/jmolla31/cosmy</PackageProjectUrl>
     <RepositoryUrl>www.github.com/jmolla31/cosmy</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
