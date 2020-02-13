@@ -57,6 +57,16 @@ namespace Cosmy
             return query.Document;
         }
 
+        public async Task<Guid> CreateDocumentAsync<T>(string collection, T @object, object partitionKey = null) where T : class
+        {
+            var uri = UriFactory.CreateDocumentCollectionUri(configuration.Database, collection);
+
+            var partitionOptions = (partitionKey != null) ? new RequestOptions { PartitionKey = new PartitionKey(partitionKey) } : null;
+
+            var query = await this.documentClient.CreateDocumentAsync(uri, @object, partitionOptions);
+            return Guid.Parse(query.Resource.Id);
+        }
+
         public async Task UpdateDocumentAsync<T>(Guid documentId, string collection, T data, object partitionKey = null) where T : class
         {
             await this.UpdateDocumentAsync(documentId.ToString(), collection, data, partitionKey);
