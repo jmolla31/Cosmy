@@ -1,2 +1,2 @@
 # Cosmy
- Tiny wrapper over Microsoft's DocumentDb.Core client
+Simple wrapper over Microsoft's DocumentDb.Core client
