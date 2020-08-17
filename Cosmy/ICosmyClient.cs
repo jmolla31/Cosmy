@@ -14,6 +14,7 @@ namespace Cosmy
         Task<IEnumerable<T>> ExecuteQuery<T>(IQueryable<T> source) where T : class;
         Task<T> GetDocumentAsync<T>(Guid documentId, string collection, object partitionKey = null) where T : class;
         Task<T> GetDocumentAsync<T>(string documentId, string collection, object partitionKey = null) where T : class;
+        Task<object> GetDocumentAsync(string documentId, string collection, Type @type, object partitionKey = null);
         Task<Guid> CreateDocumentAsync<T>(string collection, T @object, object partitionKey = null) where T : class;
         Task UpdateDocumentAsync<T>(Guid documentId, string collection, T data, object partitionKey = null) where T : class;
         Task UpdateDocumentAsync<T>(string documentId, string collection, T data, object partitionKey = null) where T : class;

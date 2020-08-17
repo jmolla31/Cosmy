@@ -1,6 +1,7 @@
 ﻿using Cosmy.Config;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,18 @@ namespace Cosmy
             var query = await documentClient.ReadDocumentAsync<T>(uri, partitionOptions);
 
             return query.Document;
+        }
+
+
+        public async Task<object> GetDocumentAsync(string documentId, string collection, Type @type, object partitionKey = null)
+        {
+            var uri = UriFactory.CreateDocumentUri(configuration.Database, collection, documentId);
+
+            var partitionOptions = (partitionKey != null) ? new RequestOptions { PartitionKey = new PartitionKey(partitionKey) } : null;
+
+            var query = await documentClient.ReadDocumentAsync(uri, partitionOptions);
+
+            return JsonConvert.DeserializeObject(query.Resource.ToString(), type);
         }
 
         public async Task<Guid> CreateDocumentAsync<T>(string collection, T @object, object partitionKey = null) where T : class
