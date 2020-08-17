@@ -9,14 +9,14 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>jmolla31, javimollamico</Authors>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
-    <Version>1.1.1</Version>
-    <PackageReleaseNotes>Updated Microsoft.Azure.DocumentDB.Core version to 2.10.0</PackageReleaseNotes>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>Added new overload to GetDocumentAsync(), dependency upgrade.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.10.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.11.6" />
   </ItemGroup>
 
 </Project>
