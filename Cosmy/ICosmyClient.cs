@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.Documents.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Cosmy
     public interface ICosmyClient
     {
         IQueryable<T> CreateDocumentQuery<T>(string collection, object partitionKey = null);
+        IQueryable<T> CreateDocumentQuery<T>(string collection, FeedOptions feedOptions);
         Task DeleteDocumentAsync(Guid documentId, string collection, object partitionKey = null);
         Task DeleteDocumentAsync(string documentId, string collection, object partitionKey = null);
         Task<IEnumerable<TResult>> ExecuteQuery<T, TResult>(IQueryable<T> source) where T : class;

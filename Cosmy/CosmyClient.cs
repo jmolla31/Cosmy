@@ -32,6 +32,15 @@ namespace Cosmy
             return query;
         }
 
+        public IQueryable<T> CreateDocumentQuery<T>(string collection, FeedOptions feedOptions)
+        {
+            var uri = UriFactory.CreateDocumentCollectionUri(configuration.Database, collection);
+
+            var query = this.documentClient.CreateDocumentQuery<T>(uri, feedOptions);
+
+            return query;
+        }
+
         public async Task<IEnumerable<T>> ExecuteQuery<T>(IQueryable<T> source) where T : class
         {
             return await source.ExecuteQuery();
