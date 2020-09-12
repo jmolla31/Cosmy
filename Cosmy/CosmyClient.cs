@@ -25,9 +25,18 @@ namespace Cosmy
         {
             var uri = UriFactory.CreateDocumentCollectionUri(configuration.Database, collection);
 
-            var partitionOptions = (partitionKey != null) ? new FeedOptions { PartitionKey = new PartitionKey(partitionKey) } : null;
+            var partitionOptions = (partitionKey != null) ? new FeedOptions { PartitionKey = new PartitionKey(partitionKey) } : new FeedOptions { EnableCrossPartitionQuery = true };
 
             var query = this.documentClient.CreateDocumentQuery<T>(uri, partitionOptions);
+
+            return query;
+        }
+
+        public IQueryable<T> CreateDocumentQuery<T>(string collection, FeedOptions feedOptions)
+        {
+            var uri = UriFactory.CreateDocumentCollectionUri(configuration.Database, collection);
+
+            var query = this.documentClient.CreateDocumentQuery<T>(uri, feedOptions);
 
             return query;
         }
