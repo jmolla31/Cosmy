@@ -9,10 +9,10 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>jmolla31, javimollamico</Authors>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>Added new overload to GetDocumentAsync(), dependency upgrade.</PackageReleaseNotes>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <FileVersion>1.2.1.0</FileVersion>
+    <Version>1.2.1</Version>
+    <PackageReleaseNotes>Merged PR by @pabravil (Added overload for method CreateDocumentQuery with FeedOptions param)</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
